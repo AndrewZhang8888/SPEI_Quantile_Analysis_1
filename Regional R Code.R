@@ -1,0 +1,10 @@
+library(dplyr)
+library(ggplot2)
+NRCC <- read.csv("C:/Users/epica/Desktop/CUNY ASRC/Excel Activity/regional_data.csv", header = TRUE, sep = ",")
+NRCC1 <- select(NRCC, ï..Year, Month, AvgPrecip)
+NRCC2 <- arrange(NRCC1, Month)
+NRCC3 <- group_by(NRCC2, Month)
+NRCC4 <- summarize(NRCC3, AvgPrecip = mean(AvgPrecip))
+NRCC5 <- mutate(NRCC4, months = c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"))
+ggplot(NRCC5, aes(months, AvgPrecip))+
+  geom_bar(stat = "identity")
